@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+on:
+
+#Le workflow se déclenche à chaque push sur la branche "main"
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+
+# Permet de s'assurer que les jobs du worflow s'éxécuteront dans un environnement Linux à jour.
+    runs-on: ubuntu-latest
+
+# permission d'écrire sur le contenus du dépôt
+    permissions:
+      contents: write
+
+# Liste les étapes à exécuter dans le job
+    steps:
+    
+# Permet de cloner le code source du dépôt dans l'environnement de la VM
+      - uses: actions/checkout@v4
+
+#configure l'environnement de Node.js (version 20 + mettre en cache les dépendances npm)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+# Etape 1
+      - name: Install dependencies
+   # Installe les dépendances du projet
+        run: npm install --frozen-lockfile
+
+# Etape 2
+      - name: Build website
+   # Compile le site web
+        run: npm run build
+        
+# Etape 3
+      - name: Deploy to GitHub Pages
+   # Déploie le contenu sur Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+  # Token Github
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+  # Spécifie le dossier à publier 
+          publish_dir: ./dist/challenge-rick/browser
+  # Nom d'utilisateur utilisé pour le commit de déploiement
+          user_name: github-actions[bot]
+  # Adresse mail utilisée pour le commit de déploiement 
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+
+
+
+        
