@@ -1,32 +1,32 @@
 <div class="center-container horror-background">
-    <div class="custom-card">
-      <div class="custom-card-header">
-        <h1>Rick Challenge</h1>
-      </div>
-      <div class="custom-card-body">
-        <div class="card-content">
-          <div *ngIf="character">
-            <img [src]="character.image" alt="Character Image" class="card-image" />
-            <div class="custom-card-content">
-              <p><strong class="blue-text">Nom :</strong> {{ character.name }}</p>
-              <p><strong class="blue-text">Espèce :</strong> {{ character.species }}</p>
-              <p><strong class="blue-text">Statut :</strong> {{ character.status }}</p>
-              <p><strong class="blue-text">ID :</strong> {{ character.id }}</p>
-            </div>
-          </div>
-          <div *ngIf="!canClickButton" class="custom-card-footer">
-            <div class="hourglass-container">
-              <div class="hourglass"></div> <!-- Premier sablier -->
-              <div class="hourglass"></div> <!-- Deuxième sablier -->
-              <div class="hourglass"></div> <!-- Troisième sablier -->
-              <div class="hourglass"></div> <!-- Troisième sablier -->
-              <div class="hourglass"></div> <!-- Troisième sablier -->
-            </div>
-            Vous devez attendre : {{ formatTime(countdown) }}
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h1>Rick Challenge</h1>
+    </div>
+    <div class="custom-card-body">
+      <div class="card-content">
+        <div *ngIf="character">
+          <img [src]="character.image" alt="Character Image" class="card-image" />
+          <div class="custom-card-content">
+            <p><strong class="blue-text">Nom :</strong> {{ character.name }}</p>
+            <p><strong class="blue-text" data-test-id="here-a-species">Espèce :</strong> {{ character.species }}</p>
+            <p><strong class="blue-text">Statut :</strong> {{ character.status }}</p>
+            <p><strong class="blue-text">ID :</strong> {{ character.id }}</p>
           </div>
         </div>
-        <button (click)="getRandomCharacter()" [disabled]="!canClickButton" class="custom-button">Clic...</button>
+        <div *ngIf="!canClickButton" class="custom-card-footer">
+          <div class="hourglass-container">
+            <div class="hourglass"></div> <!-- Premier sablier -->
+            <div class="hourglass"></div> <!-- Deuxième sablier -->
+            <div class="hourglass"></div> <!-- Troisième sablier -->
+            <div class="hourglass"></div> <!-- Troisième sablier -->
+            <div class="hourglass"></div> <!-- Troisième sablier -->
+          </div>
+          Vous devez attendre : {{ formatTime(countdown) }}
+        </div>
       </div>
+      <button data-test-id="button-to-pick-a-card" (click)="getRandomCharacter()" [disabled]="!canClickButton"
+        class="custom-button">Clic...</button>
     </div>
   </div>
-  
+</div>
